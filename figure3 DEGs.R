@@ -1,4 +1,4 @@
-###GSE19491 DEGs
+###GSE19491 DEGs 
 if(T){
 exprset <- read.table('GSE19491_Matrix.txt',sep = '\t',header = T,row.names = 1,check.names = F)
 pdata <- read.table('GSE19491_ATBvsCon_Group.txt',sep = '\t',header = T,check.names = F)
