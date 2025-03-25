@@ -129,6 +129,6 @@ log2FC <- log2(FC)
 result <- cbind(YM_mean,NC_mean,FC,log2FC,pvals,p.adj,vip)
 write.table(result,'TB.vs.NC.neg.Result.xls',sep = '\t')
 
-df <- read.table('YM.vs.NC.Volcano.xls',sep = '\t',header = T,row.names = 1,check.names = F)
+df <- read.table('TB.vs.NC.neg.Result.xls',sep = '\t',header = T,row.names = 1,check.names = F)
 colnames(df) <- c("Type","ID","YMmean","NCmean","FC","logFC","P.Value","P.adj","VIP")
 volcano_plot_enhanced(df,y_increased = 20,labs = "Metabolite",logFC_Value = 1,num_symbol = 0,FDR="P.Value")
