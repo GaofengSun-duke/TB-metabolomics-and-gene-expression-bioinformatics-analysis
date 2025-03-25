@@ -114,6 +114,21 @@ volcano_plot_enhanced <- function(df, num_symbol = 10, logFC="logFC", FDR="adj.P
   return(plot)
 }
 
+dat <- metadata
+group_list <- as.factor(group$group)
+YM_data <- metadata[,1:74]
+NC_data <- metadata[,75:180]
+pvals <- apply(metadata,1,function(x){
+  t.test(as.numeric(x)~group_list)$p.value
+})
+p.adj = p.adjust(pvals,method = 'BH')
+YM_mean <- rowMeans(YM_data)
+NC_mean <- rowMeans(NC_data)
+FC <- YM_mean/NC_mean
+log2FC <- log2(FC)
+result <- cbind(YM_mean,NC_mean,FC,log2FC,pvals,p.adj,vip)
+write.table(result,'TB.vs.NC.neg.Result.xls',sep = '\t')
+
 df <- read.table('YM.vs.NC.Volcano.xls',sep = '\t',header = T,row.names = 1,check.names = F)
 colnames(df) <- c("Type","ID","YMmean","NCmean","FC","logFC","P.Value","P.adj","VIP")
 volcano_plot_enhanced(df,y_increased = 20,labs = "Metabolite",logFC_Value = 1,num_symbol = 0,FDR="P.Value")
